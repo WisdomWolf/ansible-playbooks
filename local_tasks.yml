@@ -1,0 +1,11 @@
+---
+# file: local_tasks.yml
+- name: local tasks
+  hosts: all
+  tasks:
+    - name: update local authorized_keys from GitHub
+#      delegate_to: localhost
+      authorized_key:
+        key: https://github.com/wisdomwolf.keys
+        user: "{{ ansible_env.USER }}"
+      run_once: true

@@ -1,0 +1,28 @@
+---
+- name: apply common configuration to all nodes
+  hosts: raspberry_pis
+  debugger: on_failed
+  force_handlers: true
+#  vars_files:
+#    - ./vars.yml
+
+  tasks:
+
+    - import_role:
+        name: mikolak-net.raspi_config
+      become: yes
+      vars:
+        raspi_config_update_packages: yes
+        raspi_config_expanded_filesystem: yes
+        raspi_config_memory_split_gpu: 16
+        raspi_config_locale: en_US.UTF-8
+        raspi_config_timezone: US/Eastern
+        raspi_config_hostname: "{{inventory_hostname_short}}"
+      tags:
+        - 'raspi-config'
+    - name: update authorized_keys from GitHub
+      authorized_key:
+        key: https://github.com/wisdomwolf.keys
+        user: "{{ ansible_env.USER }}"
+        state: present
+- import_playbook: room-assistant.yml

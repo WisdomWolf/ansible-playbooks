@@ -1,0 +1,19 @@
+room_assistant_global_config:
+  bluetoothClassic:
+    addresses:
+    - f0:5c:77:c4:f4:e1
+    - ec:aa:25:4c:18:88
+    - 88:29:9c:bb:2d:46
+    - 18:54:cf:0e:3d:7b
+    interval: 10
+    timeoutCycles: 2
+  global:
+    integrations:
+    - homeAssistant
+    - bluetoothClassic
+  homeAssistant:
+    mqttOptions:
+      password: L7Af!K1!IK9Jzxx1ll!I
+      username: room_assistant
+    mqttUrl: mqtt://developingwisdom.org:1883
+room_assistant_version: latest

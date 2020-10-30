@@ -1,0 +1,21 @@
+___
+room_assistant_version: latest
+room_assistant_global_config:
+  global:
+    integrations:
+      - homeAssistant
+      - bluetoothClassic
+  homeAssistant:
+    mqttUrl: mqtt://developingwisdom.org:1883
+    mqttOptions:
+      username: room_assistant
+      password: 'L7Af!K1!IK9Jzxx1ll!I'
+  bluetoothClassic:
+    addresses:
+      - 'f0:5c:77:c4:f4:e1'  # Pixel 4 XL
+      - 'ec:aa:25:4c:18:88'  # Note 10+
+      #- '88:9f:6f:65:28:11'  # Galaxy Watch
+      - '88:29:9c:bb:2d:46'  # Amanda's Note 10
+      - '18:54:cf:0e:3d:7b'  # Airin's S20
+    interval: 10
+    timeoutCycles: 2

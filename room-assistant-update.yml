@@ -1,0 +1,23 @@
+---
+- hosts: room_assistants
+  tasks:
+    - name: Create config directory
+      file:
+        path: ~/room-assistant/config
+        state: directory
+    - name: Create global config file
+      when: room_assistant_global_config is defined
+      copy:
+        dest: "~/room-assistant/config/{{ ansible_hostname }}.yml"
+        content: "{{ room_assistant_global_config | to_nice_yaml }}"
+    - name: Create config file
+      when: room_assistant_config is defined
+      copy:
+        dest: "~/room-assistant/config/local.yml"
+        content: "{{ room_assistant_config | to_nice_yaml }}"
+    - name: Restart room-assistant service
+      become: yes
+      systemd:
+        name: room-assistant
+        enabled: yes
+        state: restarted
